@@ -1,9 +1,9 @@
 # Environmental Sensor Dashboard by Nancy
 
-Welcome 🎉! 
+Welcome 🎉!
 
-This repository contains my front-end exercise submission.
- 
+This repository contains my front-end coding challenge submission.
+
 Feel free to explore the code and see the features that have been implemented. I’ve included a brief overview of the tools and libraries along with instructions on how to set up the project locally.
 
 I’m excited about the opportunity to showcase my skills to Sensat and I look forward to hearing your feedback!
@@ -12,20 +12,19 @@ I’m excited about the opportunity to showcase my skills to Sensat and I look f
 
 This application dynamically displays the sensor data fetched the data from the `sensor_readings.json` file and displayed in a scrollable table. Users are able to sort the table by the timestamp in ascending or descending order, and by the sensor type in alphabetical order.
 
-#### Extra Features 
+#### Extra Features
 
-- **Add New Sensor Data**: 
+- **Add New Sensor Data**:
 
- You can add new sensor data through a dialog form. When you do, the `handleNewSensor` function updates the state so that the table refreshes instantly to show the latest data.
+You can add new sensor data through a dialog form. When you do, the `handleNewSensor` function updates the state so that the table refreshes instantly to show the latest data.
 
- - **Filter Data**:
- 
- You are able to filter data based on sensor type or name. The `handleFilter` function in the `SensorTable` component manages this feature, ensuring the displayed data matches the filter criteria. A clear filter button is also included to reset the table and show all data.
+- **Filter Data**:
 
+You are able to filter data based on sensor type or name. The `handleFilter` function in the `SensorTable` component manages this feature, ensuring the displayed data matches the filter criteria. A clear filter button is also included to reset the table and show all data.
 
 ## Design decisions
 
-#### Frameworks and Libraries 
+#### Frameworks and Libraries
 
 - **React**: I chose React for this project because it is well-suited for building dynamic and interactive UIs. Its efficient state management and component-based structure made it a natural fit for this project.
 
@@ -34,6 +33,7 @@ This application dynamically displays the sensor data fetched the data from the 
 - **React Virtuoso**: This library is great for rendering large data lists efficiently. Given the size of the sensor data, React Virtuoso ensures smooth scrolling and performance.
 
 #### UI/UX Design
+
 The table features a fixed header for better readability and navigation when scrolling through large data sets. Buttons like the "Filter" and "Add Sensor" were styled with bright gradients (the colour scheme was inspired by Sensat's website colours 😁) and hover effects to make the UI visually appealing and interactive.
 
 To keep things manageable, I added pagination so users can navigate data without being overwhelmed by too much at once.
@@ -60,24 +60,28 @@ State management is centralised in the `App` component, ensuring that filtering,
 
 - I would expand the test coverage to include comprehensive integration tests, ensuring that edge cases and error states are thoroughly addressed. Additionally, I would implement snapshot testing for UI components to quickly identify and catch any unexpected changes.
 
-##  How to run the project
+## How to run the project
 
 1. Clone the Repository:
- ```sh
-   git clone https://github.com/Nancyb26/Front-end-test-Nancy.git
- ```
+
+```sh
+  git clone https://github.com/Nancyb26/Front-end-test-Nancy.git
+```
 
 2. Navigate to the Project Directory:
- ```sh
-   cd <project-directory>
- ```
+
+```sh
+  cd Front-end-test-Nancy
+```
 
 3. Install Dependencies using npm:
- ```sh
-   npm install
- ```
+
+```sh
+  npm install
+```
 
 4. Run the Project:
- ```sh
-   npm start
- ```
+
+```sh
+  npm start
+```

@@ -4,8 +4,8 @@ import { TableVirtuoso } from "react-virtuoso";
 import Pagination from "@mui/material/Pagination";
 import "../styles.css";
 import TableHeader from "./TableHeader";
-import FilterButton from "./FilterButton"; 
-import AddButton from "./AddButton"; 
+import FilterButton from "./FilterButton";
+import AddButton from "./AddButton";
 import SensorDialog from "./SensorDialog";
 
 const rowsPerPage = 50;

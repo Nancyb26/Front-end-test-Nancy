@@ -31,7 +31,6 @@ const mockData = [
   },
 ];
 
-
 const mockSortHandler = jest.fn();
 const mockNewSensorHandler = jest.fn();
 
@@ -48,7 +47,7 @@ describe("SensorTable Component", () => {
     );
 
     const timeHeader = screen.getByText(/Timestamp/i);
-    fireEvent.click(timeHeader); 
+    fireEvent.click(timeHeader);
 
     await waitFor(() => expect(mockSortHandler).toHaveBeenCalledWith("time"));
   });
@@ -65,7 +64,7 @@ describe("SensorTable Component", () => {
     );
 
     const sensorTypeHeader = screen.getByText(/Sensor Type/i);
-    fireEvent.click(sensorTypeHeader); 
+    fireEvent.click(sensorTypeHeader);
 
     await waitFor(() =>
       expect(mockSortHandler).toHaveBeenCalledWith("sensor_type")
@@ -80,21 +79,21 @@ describe("SensorTable Component", () => {
         onNewSensor={mockNewSensorHandler}
       />
     );
-  
+
     const filterButton = screen.getByRole("button", { name: /filter/i });
     fireEvent.click(filterButton);
 
     await waitFor(() => screen.findByRole("menuitem", { name: /CO/i }));
-  
+
     const coFilterOption = screen.getByRole("menuitem", { name: /CO/i });
-    fireEvent.click(coFilterOption); 
-  
+    fireEvent.click(coFilterOption);
+
     await waitFor(() => {
-        const filteredData = screen.getByText(/CO/i);
-        expect(filteredData).toBeInTheDocument();
-      });
+      const filteredData = screen.getByText(/CO/i);
+      expect(filteredData).toBeInTheDocument();
+    });
   });
-  
+
   test("filters by sensor name", async () => {
     render(
       <SensorTable
@@ -103,11 +102,10 @@ describe("SensorTable Component", () => {
         onNewSensor={mockNewSensorHandler}
       />
     );
-  
 
     const filterButton = screen.getByaRole("button", { name: /filter/i });
-    fireEvent.click(filterButton)
-  
+    fireEvent.click(filterButton);
+
     await waitFor(() => screen.getByText(/Ozone/i));
 
     const ozoneFilterOption = screen.getByRole("menuitem", { name: /Ozone/i });
@@ -118,7 +116,6 @@ describe("SensorTable Component", () => {
       expect(filteredData).toBeInTheDocument();
     });
   });
-  
 
   test("combines sorting and filtering", async () => {
     render(
@@ -131,9 +128,8 @@ describe("SensorTable Component", () => {
       />
     );
 
-
     const sensorTypeHeader = screen.getByText(/Sensor Type/i);
-    fireEvent.click(sensorTypeHeader); 
+    fireEvent.click(sensorTypeHeader);
 
     await waitFor(() => {
       expect(mockSortHandler).toHaveBeenCalledWith("sensor_type");

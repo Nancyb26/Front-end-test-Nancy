@@ -1,9 +1,16 @@
-import React from 'react';
+import React from "react";
 import { Button, Menu, MenuItem, Box } from "@mui/material";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
-const FilterButton = ({ filter, onFilter, onMenuClick, anchorEl, onMenuClose, data }) => (
-  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+const FilterButton = ({
+  filter,
+  onFilter,
+  onMenuClick,
+  anchorEl,
+  onMenuClose,
+  data,
+}) => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
     <Button
       variant="outlined"
       startIcon={<FilterAltIcon />}
@@ -24,7 +31,7 @@ const FilterButton = ({ filter, onFilter, onMenuClick, anchorEl, onMenuClose, da
     {filter && (
       <Button
         variant="contained"
-        onClick={() => onFilter('')}
+        onClick={() => onFilter("")}
         sx={{
           backgroundColor: "#ff7966",
           color: "#fff",
@@ -34,16 +41,11 @@ const FilterButton = ({ filter, onFilter, onMenuClick, anchorEl, onMenuClose, da
           },
         }}
       >
-        {filter}{" "}
-        <span style={{ marginLeft: "8px", cursor: "pointer" }}>✕</span>
+        {filter} <span style={{ marginLeft: "8px", cursor: "pointer" }}>✕</span>
       </Button>
     )}
 
-    <Menu
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={onMenuClose}
-    >
+    <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onMenuClose}>
       <MenuItem onClick={() => onFilter("")}>All</MenuItem>
       {[...new Set(data.map((item) => item.sensor_type))].map((type) => (
         <MenuItem key={type} onClick={() => onFilter(type)}>

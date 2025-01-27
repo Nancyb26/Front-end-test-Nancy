@@ -10,17 +10,17 @@ I’m excited about the opportunity to showcase my skills to Sensat and I look f
 
 #### Basic Features
 
-This application dynamically displays the sensor data fetched the data from the `sensor_readings.json` file and displayed in a scrollable table. Users are able to sort the table by the timestamp in ascending or descending order, and by the sensor type in alphabetical order.
+This application dynamically displays the sensor data fetched from the `sensor_readings.json` file and displays this in a scrollable table. Users are able to sort the table by the timestamp in ascending or descending order, and by the sensor type in alphabetical order.
 
 #### Extra Features
 
 - **Add New Sensor Data**:
 
-You can add new sensor data through a dialog form. When you do, the `handleNewSensor` function updates the state so that the table refreshes instantly to show the latest data.
+Users can add new sensor data through a dialog form. When submitted, the `handleNewSensor` function updates the state so that the table refreshes instantly to show the latest data.
 
 - **Filter Data**:
 
-You are able to filter data based on sensor type or name. The `handleFilter` function in the `SensorTable` component manages this feature, ensuring the displayed data matches the filter criteria. A clear filter button is also included to reset the table and show all data.
+Users can filter data based on sensor type or name. The `handleFilter` function in the `SensorTable` component manages this functionality, dynamically updating the displayed data to match the filter criteria. A clear filter button is also available to reset the table and show all data.
 
 ## Design decisions
 
@@ -28,7 +28,7 @@ You are able to filter data based on sensor type or name. The `handleFilter` fun
 
 - **React**: I chose React for this project because it is well-suited for building dynamic and interactive UIs. Its efficient state management and component-based structure made it a natural fit for this project.
 
-- **Material-UI**: For pre-built, consistent and customisable UI components, Material UI (MUI) provided a great balance of simplicity and flexibility so, I have implemented some MUI features such as buttons, icons and pagination components.
+- **Material-UI (MUI)**: I used MUI for its pre-built, consistent, and customisable UI components. Features like buttons, icons, and pagination are implemented using this library.
 
 - **React Virtuoso**: This library is great for rendering large data lists efficiently. Given the size of the sensor data, React Virtuoso ensures smooth scrolling and performance.
 

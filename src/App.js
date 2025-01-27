@@ -4,27 +4,22 @@ import SensorTable from "./components/SensorTable";
 const App = () => {
   const [sensorData, setSensorData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const [sortBy, setSortBy] = useState(""); 
-  const [sortOrder, setSortOrder] = useState("asc"); 
-  const [filterBy, setFilterBy] = useState(""); 
+  const [sortBy, setSortBy] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [filterBy, setFilterBy] = useState("");
 
   useEffect(() => {
     fetch("/data/sensor_readings.json")
       .then((response) => response.json())
       .then((data) => {
         setSensorData(data);
-        setOriginalData(data); 
+        setOriginalData(data);
       })
       .catch((error) => console.error("Failed to fetch data", error));
   }, []);
 
   const handleSort = (key) => {
     const order = sortBy === key && sortOrder === "asc" ? "desc" : "asc";
-
-    const handleClearFilter = () => {
-      setFilterBy("");
-      setSensorData(originalData); 
-    };
 
     const sortedData = [...sensorData].sort((a, b) => {
       if (key === "time") {
@@ -38,9 +33,9 @@ const App = () => {
       return 0;
     });
 
-    setSortBy(key); 
-    setSortOrder(order); 
-    setSensorData(sortedData); 
+    setSortBy(key);
+    setSortOrder(order);
+    setSensorData(sortedData);
   };
 
   const handleFilter = (sensorType) => {
@@ -48,7 +43,7 @@ const App = () => {
     const filteredData = sensorType
       ? originalData.filter((entry) => entry.sensor_type === sensorType)
       : originalData;
-    setSensorData(filteredData); 
+    setSensorData(filteredData);
   };
 
   const handleNewSensor = (newSensor) => {
@@ -61,7 +56,7 @@ const App = () => {
       <SensorTable
         data={sensorData}
         onSort={handleSort}
-        onNewSensor={handleNewSensor} 
+        onNewSensor={handleNewSensor}
         filterBy={filterBy}
         sortBy={sortBy}
         sortOrder={sortOrder}

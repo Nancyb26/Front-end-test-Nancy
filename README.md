@@ -40,7 +40,7 @@ To keep things manageable, I added pagination so users can navigate data without
 
 #### Code organisation
 
-The App is structured into reusable components ( `App.js`, `SensorTable.js`, and `TableHeader.js`) to keep the code organised and easy to maintain.
+The App is structured into reusable components ( e.g `App.js`, `SensorTable.js`,`TableHeader.js` `FilterButton.js`) to keep the code organised and easy to maintain.
 
 State management is centralised in the `App` component, ensuring that filtering, sorting and adding data logic are kept in separate utility functions, making them easier to debug and test when needed.
 

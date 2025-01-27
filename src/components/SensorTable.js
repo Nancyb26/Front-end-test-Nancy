@@ -1,25 +1,12 @@
 import React, { useState, useMemo } from "react";
-import {
-  TableCell,
-  TableContainer,
-  TableRow,
-  Paper,
-  Menu,
-  MenuItem,
-  Box,
-  Button,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { TableCell, TableContainer, TableRow, Paper, Box } from "@mui/material";
 import { TableVirtuoso } from "react-virtuoso";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import AddIcon from "@mui/icons-material/Add";
 import Pagination from "@mui/material/Pagination";
 import "../styles.css";
 import TableHeader from "./TableHeader";
+import FilterButton from "./FilterButton"; 
+import AddButton from "./AddButton"; 
+import SensorDialog from "./SensorDialog";
 
 const rowsPerPage = 50;
 
@@ -161,164 +148,31 @@ function SensorTable({ data, onSort, sortBy, sortOrder, onNewSensor }) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        backgroundColor: "#f5f5f5",
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "white",
-          padding: "9px",
-          boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.1)",
-          marginBottom: "0px",
-        }}
-      >
-        <h1
-          style={{
-            margin: 0,
-            textAlign: "center",
-            color: "white",
-            fontFamily: "'Poppins', sans-serif",
-            background: "linear-gradient(135deg, #ff4942, #ff7966)",
-            padding: "20px 0",
-            borderRadius: "12px",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.25)",
-            fontSize: "2.5rem",
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            lineHeight: "1.2",
-          }}
-        >
-          Environmental Sensor Dashboard
-        </h1>
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "20px",
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Button
-              variant="outlined"
-              startIcon={<FilterAltIcon />}
-              onClick={handleMenuClick}
-              sx={{
-                textTransform: "none",
-                borderColor: "#ff4942",
-                color: "#ff4942",
-                "&:hover": {
-                  borderColor: "#ff4942",
-                  backgroundColor: "rgba(255, 73, 66, 0.1)",
-                },
-              }}
-            >
-              Filter
-            </Button>
-
-            {filter && (
-              <Button
-                variant="contained"
-                onClick={() => setFilter("")}
-                sx={{
-                  backgroundColor: "#ff7966",
-                  color: "#fff",
-                  textTransform: "none",
-                  "&:hover": {
-                    backgroundColor: "#ff4942",
-                  },
-                }}
-              >
-                {filter}{" "}
-                <span style={{ marginLeft: "8px", cursor: "pointer" }}>✕</span>
-              </Button>
-            )}
-          </Box>
-
-          <Button
-            variant="outlined"
-            startIcon={<AddIcon />}
-            onClick={handleDialogOpen}
-            sx={{
-              textTransform: "none",
-              borderColor: "#ff4942",
-              color: "#ff4942",
-              "&:hover": {
-                borderColor: "#ff4942",
-                backgroundColor: "rgba(255, 73, 66, 0.1)",
-              },
-            }}
-          >
-            Add New Data
-          </Button>
+    <div className="sensor-table-container">
+      <Box className="header-box">
+        <h1 className="header-title">Environmental Sensor Dashboard</h1>
+        <Box className="header-actions">
+          <FilterButton
+            filter={filter}
+            onFilter={handleFilter}
+            onMenuClick={handleMenuClick}
+            anchorEl={anchorEl}
+            onMenuClose={handleMenuClose}
+            data={data}
+          />
+          <AddButton onClick={handleDialogOpen} />
         </Box>
       </Box>
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={() => handleFilter("")}>All</MenuItem>
-        {[...new Set(data.map((item) => item.sensor_type))].map((type) => (
-          <MenuItem key={type} onClick={() => handleFilter(type)}>
-            {type}
-          </MenuItem>
-        ))}
-      </Menu>
+      <SensorDialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        newSensor={newSensor}
+        onInputChange={handleInputChange}
+        onAddSensor={handleAddSensor}
+      />
 
-      <Dialog open={dialogOpen} onClose={handleDialogClose}>
-        <DialogTitle>Add New Sensor Data</DialogTitle>
-        <DialogContent>
-          {Object.keys(newSensor).map((field) => (
-            <TextField
-              key={field}
-              name={field}
-              label={field.replace("_", " ").toUpperCase()}
-              value={newSensor[field]}
-              onChange={handleInputChange}
-              fullWidth
-              margin="dense"
-            />
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleDialogClose}
-            sx={{
-              color: "#ff4942",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "rgba(255, 73, 66, 0.1)",
-              },
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleAddSensor}
-            sx={{
-              backgroundColor: "#ff4942",
-              color: "#fff",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#e9433d",
-              },
-            }}
-          >
-            Add Sensor
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Paper style={{ flexGrow: 1, width: "100%", marginTop: "0px" }}>
+      <Paper className="table-paper">
         <TableVirtuoso
           data={paginatedData}
           components={VirtuosoTableComponents}
@@ -327,14 +181,7 @@ function SensorTable({ data, onSort, sortBy, sortOrder, onNewSensor }) {
         />
       </Paper>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px 20px",
-        }}
-      >
+      <Box className="pagination-box">
         <span>
           {startIndex}-{endIndex} of {filteredData.length}
         </span>
